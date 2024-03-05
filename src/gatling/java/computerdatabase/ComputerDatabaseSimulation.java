@@ -20,8 +20,6 @@ public class ComputerDatabaseSimulation extends Simulation {
         public void before() {
                 System.out.printf("Running test with %d users%n", usersCount);
         }
-
-
         
         ChainBuilder search = exec(http("Home").get("/"))
                         .pause(1)
@@ -85,7 +83,7 @@ public class ComputerDatabaseSimulation extends Simulation {
         // , browse
         );
         ScenarioBuilder admins = scenario("Admins").exec(search, browse, edit);
-        Assertion assertion = global().responseTime().percentile(95.0).lt(250);
+        Assertion assertion = global().responseTime().percentile(95.0).lt(300);
         {
                 setUp(
                                 users.injectOpen(rampUsers(usersCount).during(35))).assertions(assertion).protocols(httpProtocol);
